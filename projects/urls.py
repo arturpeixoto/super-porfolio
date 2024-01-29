@@ -1,9 +1,14 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework import routers
+from .views import (
+  ProfileViewSet,
+  ProjectViewSet
+)
+
+router = routers.DefaultRouter()
+router.register(r"profiles", ProfileViewSet)
+router.register(r"projects", ProjectViewSet)
 
 urlpatterns = [
-    path('profiles/', views.ProfileList.as_view()),
-    path('profiles/<int:pk>/', views.ProfileDetail.as_view()),
-    path('projects/', views.ProjectList.as_view()),
-    path('projects/<int:pk>/', views.ProjectDetail.as_view()),
+    path("", include(router.urls))
 ]
