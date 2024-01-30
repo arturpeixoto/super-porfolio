@@ -8,5 +8,52 @@
         <p><strong>GitHub:</strong> <a href="{{ profile.github }}" target="_blank">{{ profile.github }}</a></p>
         <p><strong>LinkedIn:</strong> <a href="{{ profile.linkedin }}" target="_blank">{{ profile.linkedin }}</a></p>
         <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        {% if profile.projects.all %}
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Descrição</th>
+                  <th>URL</th>
+                  <th>Palavras-chave</th>
+                  <th>Skills</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for project in profile.projects.all %}
+                  <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.description }}</td>
+                    <td>{{ project.github_url }}</td>
+                    <td>{{ project.keyword }}</td>
+                    <td>{{ project.key_skill }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+            <p>Nenhum certificado disponível.</p>
+        {% endif %}
+        {% if profile.certificates.all %}
+            <table>
+              <thead>
+                <tr>
+                  <th>Certificado</th>
+                  <th>Instituição</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for certificate in profile.certificates.all %}
+                  <tr>
+                    <td>{{ certificate }}</td>
+                    <td>{{ certificate.certifying_institution }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+            <p>Nenhum certificado disponível.</p>
+        {% endif %}
+
     </div>
 {% endblock %}

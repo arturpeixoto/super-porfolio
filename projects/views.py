@@ -25,12 +25,16 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         if request.method == 'GET':
-            instance = self.get_object()
-            serializer = self.get_serializer(instance)
+            # Dessa forma abaixo, não está encontrando os certificados dos
+            # perfis
+            # instance = self.get_object()
+            # serializer = self.get_serializer(instance)
+            profile_id = kwargs.get('pk')
+            profile = Profile.objects.get(pk=profile_id)
             return render(
                 request,
                 "profile_detail.html",
-                {"profile": serializer.data}
+                {"profile": profile}
                 )
         return super().retrieve(request, *args, **kwargs)
 
